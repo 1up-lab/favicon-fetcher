@@ -1,0 +1,9 @@
+# IDE
+.idea
+
+# Dependencies
+vendor
+/tools/**/vendor
+
+# Local runner
+run.php

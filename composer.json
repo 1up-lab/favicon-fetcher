@@ -1,0 +1,68 @@
+{
+    "name": "oneup/favicon-fetcher",
+    "type": "library",
+    "description": "Fetch, download and store favicons for any given website",
+    "license": "proprietary",
+    "homepage": "https://1up.io",
+    "authors": [
+        {
+            "name": "Jim Schmid",
+            "email": "js@1up.io",
+            "homepage": "https://1up.io",
+            "role": "Developer"
+        }
+    ],
+
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.1",
+        "symfony/http-client": "^5.3|^6.0"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oneup\\FaviconFetcher\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Oneup\\FaviconFetcher\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true,
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
+        }
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": false,
+            "target-directory": "tools"
+        }
+    },
+    "scripts": {
+        "ecs": [
+            "@php tools/ecs/vendor/bin/ecs check src/ --ansi"
+        ],
+        "phpunit": [
+            "@php tools/phpunit/vendor/phpunit/phpunit/phpunit"
+        ],
+        "pipeline": [
+            "@ecs",
+            "@phpunit"
+        ],
+        "post-install-cmd": [
+            "@composer bin all install --ansi"
+        ],
+        "post-update-cmd": [
+            "@composer bin all update --ansi"
+        ]
+    }
+}
