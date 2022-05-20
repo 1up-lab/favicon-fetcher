@@ -11,7 +11,7 @@ class FetcherResult
     ) {
     }
 
-    public function getClosestToSize(string $size): Favicon
+    public function getClosestToSize(string $size): ?Favicon
     {
         $icons = $this->icons;
 
@@ -26,6 +26,10 @@ class FetcherResult
 
             return abs($sizeSearch - $sizeA) > abs($sizeSearch - $sizeB) ? 1 : -1;
         });
+
+        if (0 === \count($icons)) {
+            return null;
+        }
 
         return $icons[0];
     }
