@@ -27,7 +27,7 @@ class AppleTouchIconStrategy implements StrategyInterface
             $path = parse_url($href, PHP_URL_PATH);
             $href = sprintf('%s/%s', $url, ltrim($path, '/'));
 
-            $results[] = new Favicon($href, $size);
+            $results[] = new Favicon($href, (string) $size);
         }
 
         return $results;
