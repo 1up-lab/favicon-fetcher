@@ -7,7 +7,7 @@ namespace Oneup\FaviconFetcher\Result;
 class FaviconCollection
 {
     /**
-     * @var array<Favicon>
+     * @var array<int, Favicon>
      */
     private array $items = [];
 
@@ -18,6 +18,9 @@ class FaviconCollection
         return $this;
     }
 
+    /**
+     * @return array<int, Favicon>
+     */
     public function getAll(): array
     {
         return $this->items;

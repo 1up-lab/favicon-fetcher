@@ -11,6 +11,9 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class FaviconFetcher
 {
+    /**
+     * @param iterable<int, StrategyInterface> $strategies
+     */
     public function __construct(
         private readonly HttpClientInterface $client,
         private readonly iterable $strategies,

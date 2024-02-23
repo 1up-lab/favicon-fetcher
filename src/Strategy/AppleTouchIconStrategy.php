@@ -17,20 +17,19 @@ class AppleTouchIconStrategy implements StrategyInterface
     ) {
     }
 
-    public function find(string $url, \DOMXPath $xpath): ?FaviconCollection
+    public function find(string $url, \DOMXPath $xpath): FaviconCollection
     {
+        $collection = new FaviconCollection();
         $elements = $xpath->query('/html/head/link[starts-with(@rel, "apple-touch-icon")]');
 
         if (false === $elements) {
-            return null;
+            return $collection;
         }
-
-        $collection = new FaviconCollection();
 
         /** @var \DOMElement $element */
         foreach ($elements as $element) {
-            $href = $element->attributes->getNamedItem('href')?->textContent;
-            $size = $element->attributes->getNamedItem('sizes')?->textContent;
+            $href = (string) $element->attributes->getNamedItem('href')?->textContent;
+            $size = (string) $element->attributes->getNamedItem('sizes')?->textContent;
 
             try {
                 [$width, $height] = $this->sizeParser->parse($size);

@@ -8,5 +8,5 @@ use Oneup\FaviconFetcher\Result\FaviconCollection;
 
 interface StrategyInterface
 {
-    public function find(string $url, \DOMXPath $xpath): ?FaviconCollection;
+    public function find(string $url, \DOMXPath $xpath): FaviconCollection;
 }

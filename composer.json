@@ -4,7 +4,7 @@
         "ext-dom": "*",
         "ext-libxml": "*",
         "spatie/url": "^2.3",
-        "symfony/http-client": "^5.0|^6.0|^7.0"
+        "symfony/http-client-contracts": "^3.4"
     },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.8"
@@ -45,16 +45,15 @@
         "post-update-cmd": [
             "@composer bin all update --ansi"
         ],
-        "fix": [
-            "@php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -vvv --ansi"
-        ],
-        "php-cs-fixer": [
-            "@php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run -vvv --ansi"
-        ],
+        "fix": "@php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -vvv --ansi",
+        "php-cs-fixer": "@php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run -vvv --ansi",
         "phpunit": "@php tools/phpunit/vendor/bin/phpunit",
+        "phpstan": "@php tools/phpstan/vendor/bin/phpstan analyze src/ --level max --memory-limit=-1 --ansi",
         "pipeline": [
             "@php-cs-fixer",
+            "@phpstan",
             "@phpunit"
-        ]
+        ],
+        "require-checker": "@php tools/require-checker/vendor/bin/composer-require-checker check --config-file=tools/require-checker/config.json composer.json --ansi"
     }
 }
