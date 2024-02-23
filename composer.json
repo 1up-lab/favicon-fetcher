@@ -1,0 +1,60 @@
+{
+    "require": {
+        "php": ">=8.2",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "spatie/url": "^2.3",
+        "symfony/http-client": "^5.0|^6.0|^7.0"
+    },
+    "require-dev": {
+        "bamarni/composer-bin-plugin": "^1.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "Oneup\\FaviconFetcher\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Test\\Oneup\\FaviconFetcher\\": "tests/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.2"
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true,
+        "allow-plugins": {
+            "bamarni/composer-bin-plugin": true
+        }
+    },
+    "extra": {
+        "bamarni-bin": {
+            "bin-links": false,
+            "target-directory": "tools",
+            "forward-command": true
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@composer bin all install --ansi"
+        ],
+        "post-update-cmd": [
+            "@composer bin all update --ansi"
+        ],
+        "fix": [
+            "@php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix -vvv --ansi"
+        ],
+        "php-cs-fixer": [
+            "@php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run -vvv --ansi"
+        ],
+        "phpunit": "@php tools/phpunit/vendor/bin/phpunit",
+        "pipeline": [
+            "@php-cs-fixer",
+            "@phpunit"
+        ]
+    }
+}
